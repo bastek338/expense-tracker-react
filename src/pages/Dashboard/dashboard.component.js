@@ -11,10 +11,11 @@ import { useCategory } from '../../context/CategoryList/category-list.context';
 import Header from '../../components/Header/header.component.js';
 import { useUser } from '../../context/User/user.context.js';
 import dayjs from 'dayjs';
+import History from '../../components/History/history.component.js';
 
 const Dashboard = () => {
     const { user } = useUser();
-    const balance = !user?.months[dayjs().format('YYYY-MM')] ? {revenues: 0, expenses: 0} : user?.months[dayjs().format('YYYY-MM')];
+    const balance = !user.months?.[dayjs().format('YYYY-MM')] ? {revenues: 0, expenses: 0} : user.months?.[dayjs().format('YYYY-MM')];
     return (
         <>
         <Header user={user}/>
@@ -22,6 +23,7 @@ const Dashboard = () => {
             <WalletTracker categories={user.categoryList} balance={balance} months={user.months}/>
             <CardItems categories={user.categoryList}/>
             <Snackbar type="success" />
+            <History/>
             <Modal/>
         </Container>
         </>

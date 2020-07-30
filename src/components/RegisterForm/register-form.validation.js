@@ -1,9 +1,16 @@
+import React, {useContext, useState} from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { auth } from '../../firebase/firebase';
 import { checkUserInDatabase } from '../../firebase/firebase';
+import { userAction } from '../../reducers/user/user.action';
+import useUserReducer from '../../reducers/user/user.reducer';
 
-const useFormikValidation = () => {
+export const NameContext = React.createContext();
+
+const NameContextProvider = ({children}) => {
+    
+    const { dispatchUser } = useUserReducer();
     const formik = useFormik({
         initialValues: {
             firstName: '',
@@ -32,16 +39,29 @@ const useFormikValidation = () => {
                 .max(25, 'Your password is to long...')
                 .oneOf([Yup.ref('registerPassword'), null], 'The password is different from the above')
         }),
-        onSubmit: ({ registerEmail, registerPassword, firstName, lastName }) => {
+        onSubmit: ({ registerEmail, registerPassword, firstName, lastName}) => {
             auth.createUserWithEmailAndPassword(registerEmail, registerPassword)
-            .then(userData => {
-                checkUserInDatabase(userData.user, firstName, lastName)
-            })
-            .catch(err => console.log(err))
+            .then(() => {
+                const user = auth.currentUser;
+                return user.updateProfile({displayName: `${firstName} ${lastName}`})
+            })  
+            .catch(err => dispatchUser({type: userAction.ERROR, error: err.message}))
         }
     })
+    
+    return (
+    <NameContext.Provider value={{formik}}>
+        {children}
+    </NameContext.Provider>
+)}
 
-    return formik;
+export const useFormikValidation = () => {
+    const {formik} = useContext(NameContext);
+
+    return {
+        formik
+    }
 }
 
-export default useFormikValidation;
+
+export default NameContextProvider;

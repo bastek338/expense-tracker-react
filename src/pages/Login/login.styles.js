@@ -14,7 +14,8 @@ const useStyles = makeStyles(theme => ({
         height: '100%',
         [theme.breakpoints.down('sm')]: {
             background: 'inherit'
-        }
+        },
+        width: '100%'
     },
     LoginBackground: {
         width: '65%',
@@ -64,8 +65,7 @@ const useStyles = makeStyles(theme => ({
         }
     },
     LoginHeading: {
-        width: '420px',
-        padding: '0 20px'
+        textAlign: 'center'
     },
     LoginImageMobile: {
         display: 'none',

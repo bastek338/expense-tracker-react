@@ -2,7 +2,10 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 
 const useStyles = makeStyles(theme => ({
     NavTabsContainer: {
-        width: '400px'
+        width: '50%',
+        [theme.breakpoints.down('md')]: {
+            width: '90%'
+        }
     },
     NavTabsWrapper: {
         color: '#000',

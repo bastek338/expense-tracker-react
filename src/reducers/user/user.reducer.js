@@ -35,7 +35,8 @@ const useUserReducer = () => {
     return {
         user: userState.user,
         isLogin: userState.isLogin,
-        dispatchUser
+        dispatchUser,
+        error: userState.error
     }
 }
 

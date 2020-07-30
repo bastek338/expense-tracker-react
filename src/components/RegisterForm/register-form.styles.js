@@ -21,6 +21,11 @@ const useStyles = makeStyles(theme => ({
             background: '#e0623c',
             boxShadow: 'none'
         }
+    },
+    RegisterFormErrorMessage: {
+        padding: '15px 0px',
+        fontSize: '0.8rem',
+        color: '#d60707'
     }
 }))
 

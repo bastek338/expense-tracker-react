@@ -9,37 +9,38 @@ import {
 import { auth, checkUserInDatabase } from './firebase/firebase';
 import PrivateRoute from './utils/PrivateRoute/private-route';
 import Loader from './components/UI/Spinner/spinner';
-import dayjs from 'dayjs'
+import { useFormikValidation } from './components/RegisterForm/register-form.validation';
+import { firestore } from 'firebase';
+
 
 const Dashboard = React.lazy(() => import('./pages/Dashboard/dashboard.component'))
 const Login = React.lazy(() => import('./pages/Login/login.component'))
 
 
 const App = () => {
-
+    console.log(auth.currentUser?.email)
     const {user, isLogin, dispatchUser } = useUser();
     useEffect(() => { 
-
         const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
             if(isLogin) dispatchUser({type: userAction.CHECK_AUTH});    
             if(userAuth) {
                     try {
-                        const userRef = await checkUserInDatabase(userAuth, 'test', 'test')
+                        console.log('userData', userAuth)
+                        const userRef = await checkUserInDatabase(userAuth, dispatchUser)
                         userRef.onSnapshot(userSnapshot => {
-                            console.log(userSnapshot.data())
                             dispatchUser({type: userAction.FETCH_USER_DATA, user: {
                                     id: userAuth.uid,
                                     ...userSnapshot.data(),
                                 }
                             })
+                            if(!userSnapshot.data().displayName) userRef.update({displayName: userAuth.displayName})
                         })
                     } catch(e) {
                         console.log(e.message)
                         dispatchUser({type: userAction.ERROR, error: e.message})
                     }
                 } else {
-                        dispatchUser({type: userAction.FETCH_USER_DATA, user: userAuth
-                    })
+                        dispatchUser({type: userAction.FETCH_USER_DATA, user: userAuth})
                 }
             })
         
@@ -49,7 +50,7 @@ const App = () => {
             unsubscribeFromAuth();
         }
 
-    }, [dispatchUser]);
+    }, []);
 
 
     return (

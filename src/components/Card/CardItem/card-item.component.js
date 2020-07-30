@@ -18,7 +18,8 @@ const CardItem = ({name, amountSpent, icon}) => {
             <Card className={classes.CardItemContainer}>
                 <CardContent>
                     <Box className={classes.CardItemImage}>
-                        <Icon style={{fontSize: 45}}>{icon}</Icon>
+                        {/* <Icon style={{fontSize: 45}}>{icon}</Icon> */}
+                        <img style={{width: '40px', height: '40px'}} src={icon} alt={`${name}-icon`}/>
                     </Box>
                     <Box>
                         <Typography variant="caption" className={classes.CardItemCaption}>{name}</Typography>

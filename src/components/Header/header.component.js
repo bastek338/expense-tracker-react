@@ -6,15 +6,14 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert'
 import { NavLink, useHistory } from 'react-router-dom';
-import { auth } from '../../firebase/firebase';
+import { auth, db } from '../../firebase/firebase';
 import Avatar from '@material-ui/core/Avatar';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const Header = ({ user } ) => {
     const classes = headerStyles()
     const history = useHistory(); 
-    const { displayName } = user;
-    // const firstName = displayName.split(' ')[0];
+    const displayName = user.displayName;
     const logout = () => {
         auth.signOut()
     .catch(err => console.log(err.message))
@@ -53,7 +52,7 @@ const Header = ({ user } ) => {
                         Contact
                     </NavLink>
                    <Avatar alt={user.displayName} src={user.photoURL} className={classes.HeaderAvatarSize} />
-                   {/* <span className={classes.HeaderAvatarName}>{firstName}</span> */}
+                   <span className={classes.HeaderAvatarName}>{displayName}</span>
                    <IconButton className={classes.HeaderButtons} variant="contained" onClick={logout}>
                        <ExitToAppIcon/>
                    </IconButton>

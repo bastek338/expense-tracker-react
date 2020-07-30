@@ -8,6 +8,7 @@ import ModalProvider from './context/Modal/modal.context';
 import BalanceProvider from './context/Balance/balance.context';
 import CategoryProvider from './context/CategoryList/category-list.context';
 import UserProvider from './context/User/user.context';
+import NameProvider from './components/RegisterForm/register-form.validation';
 import { StateInspector } from 'reinspect';
 import {
   BrowserRouter as Router
@@ -18,15 +19,17 @@ ReactDOM.render(
     <Router>
     <StateInspector>
       <UserProvider>
+        <NameProvider>
               <CategoryProvider>
                   <ModalProvider>
                       <BalanceProvider>
                           <SnackbarProvider>
-                          <App />
+                            <App />
                           </SnackbarProvider>
                       </BalanceProvider>
                   </ModalProvider>
               </CategoryProvider>
+              </NameProvider>
       </UserProvider>
     </StateInspector>
     </Router>

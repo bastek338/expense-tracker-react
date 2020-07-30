@@ -3,12 +3,14 @@ import { Box } from '@material-ui/core';
 import CustomTextField from '../UI/CustomTextField/custom-text-field.component';
 import Button from '@material-ui/core/Button';
 import useStyles from './register-form.styles';
-import useFormikValidation from './register-form.validation';
+import { useFormikValidation } from './register-form.validation';
+import { useUser } from '../../context/User/user.context';
 
 
 const RegisterForm = () => {
     const classes = useStyles();
-    const formik = useFormikValidation()
+    const { formik } = useFormikValidation();
+    const { error } = useUser(); 
 
     return (
         <Box component="form">
@@ -77,6 +79,7 @@ const RegisterForm = () => {
                     helperText={formik.touched.repeatRegisterPassword && formik.errors.repeatRegisterPassword ? formik.errors.repeatRegisterPassword : null}
                 />
             </Box>
+            <Box className={classes.RegisterFormErrorMessage}>{error}</Box>
             <Box className={classes.RegisterFormButtons}>
                 <Button size="large" variant="contained" elevation={0} onClick={formik.handleSubmit}>register</Button>
             </Box>

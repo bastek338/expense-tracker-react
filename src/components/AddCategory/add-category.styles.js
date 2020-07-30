@@ -12,6 +12,17 @@ const useStyles = makeStyles(theme => ({
     AddCategoryButton: {
         display: 'flex',
         justifyContent: 'flex-end'
+    },
+    AddCategoryUploadButton: {
+        marginTop: '15px'
+    },
+    AddCategoryInputFile: {
+        display: 'none'
+    },
+    AddCategoryMsg: {
+        paddingTop: '5px',
+        color: '#c21010',
+        fontSize: '12px'
     }
 })) 
 
