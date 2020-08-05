@@ -10,21 +10,21 @@ import Button from '@material-ui/core/Button';
 import useTransactionFormStyles from './transactionform.styles';
 import { SnackbarContext } from '../../context/Snackbar/snackbar.context';
 import { useModal } from '../../context/Modal/modal.context';
-import { useBalance } from '../../context/Balance/balance.context';
 import { useUser } from '../../context/User/user.context';
-import { db } from '../../firebase/firebase';
 import dayjs from 'dayjs'
+import { depositSubmit, withdrawSubmit } from './transactionForm.methods';
 
 const TransactionForm = () => {
     const [typeOfPayment, setTypeOfPayment] = useState('');
     const [amount, setAmount] = useState(0);
     const [category, setCategory] = useState('');
+    const [description, setDescription] = useState('');
     const { handleAlertOpen } = useContext(SnackbarContext);
     const { handleClose } = useModal();
     const classes = useTransactionFormStyles();
-    const { dispatchBalance } = useBalance();
     const { user } = useUser();
     const currentMonth = dayjs().format('YYYY-MM');
+    const settings = {user, currentMonth, amount, typeOfPayment, category, handleClose, description};
 
     const transformedCategoryList = Object.keys(user.categoryList).map(key => {
         const item  = user.categoryList[key];
@@ -47,50 +47,14 @@ const TransactionForm = () => {
         setAmount(e.target.value)
     }
 
-    const depositSubmit = () => {
-        db.doc(`users/${user.id}`).get().then(snapshot => {
-                const revenues = !snapshot.data().months?.[currentMonth]?.revenues ? 0 : snapshot.data().months[currentMonth].revenues;
-                const expenses = !snapshot.data().months?.[currentMonth]?.expenses ? 0 : snapshot.data().months[currentMonth].expenses;
-                db.doc(`users/${user.id}`).set({
-                  months: {
-                  ...user.months,
-                  [currentMonth]: {
-                    ...user.months[currentMonth],
-                    expenses: expenses,
-                    revenues: revenues + parseInt(amount)
-                  }
-                }}, {merge: true})
-        })
-        handleClose();
+    const handleDescription = e => {
+        setDescription(e.target.value)
     }
-
-    const withdrawSubmit = () => {
-        db.doc(`users/${user.id}`).get().then(snapshot => {
-            const revenues = !snapshot.data().months?.[currentMonth]?.revenues ? 0 : snapshot.data().months[currentMonth].revenues;
-            const expenses = !snapshot.data().months?.[currentMonth]?.expenses ? 0 : snapshot.data().months[currentMonth].expenses;
-            db.doc(`users/${user.id}`).set({
-              categoryList: {
-                    ...user.categoryList,
-                    [category.toLowerCase()]: {
-                        ...user.categoryList[category.toLowerCase()],
-                        amountSpent: user.categoryList[category.toLowerCase()].amountSpent + parseInt(amount)
-              }},
-              months: {
-              ...user.months,
-              [currentMonth]: {
-                ...user.months[currentMonth],
-                expenses: expenses + parseInt(amount),
-                revenues: revenues
-              }
-            }}, {merge: true})
-    })
-        handleClose();
-        }
-
 
     const handleCategory = (e) => {
         setCategory(e.target.value)
     }
+
 
     return (
         <Box className={classes.transactionFormContainer}>
@@ -131,11 +95,20 @@ const TransactionForm = () => {
                         </Select>
                     </FormControl> 
                 }
+                <Box>
+                    <FormControl className={classes.transactionFormControl}>
+                        <TextField 
+                            id="payment-description"
+                            label="Description"  
+                            onChange={handleDescription}
+                        />
+                    </FormControl>
+                </Box>
                 </Box>
                 <Box pt={2} className={classes.transactionFormButton}>
                     { (typeOfPayment === 'deposit') ? 
-                        <Button variant="contained" color="primary" onClick={depositSubmit}>Wpłać</Button> : 
-                        <Button variant="contained" color="secondary" onClick={withdrawSubmit}>Wypłać</Button>
+                        <Button variant="contained" color="primary" onClick={() => depositSubmit(settings)}>Wpłać</Button> : 
+                        <Button variant="contained" color="secondary" onClick={() => withdrawSubmit(settings)}>Wypłać</Button>
                     }
                 </Box>
             </form>

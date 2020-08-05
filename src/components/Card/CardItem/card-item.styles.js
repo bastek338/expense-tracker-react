@@ -14,6 +14,10 @@ const useCardItemStyles = makeStyles((theme) => ({
     },
     CardItemCaption: {
         textTransform: 'capitalize'
+    },
+    CardItemDefaultSize: {
+        width: '40px',
+        height: '40px'
     }
 }))
 

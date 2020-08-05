@@ -6,7 +6,7 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('md')]: {
             display: 'none'
         }
     },
@@ -69,6 +69,11 @@ const useStyles = makeStyles(theme => ({
     },
     LoginImageMobile: {
         display: 'none',
+        [theme.breakpoints.between('sm', 'md')]: {
+            width: '500px',
+            display: 'block',
+            paddingBottom: '48px'
+        },
         [theme.breakpoints.down('sm')]: {
             width: '275px',
             paddingBottom: '48px',

@@ -24,6 +24,9 @@ const useWalletStyles = makeStyles(theme => ({
             padding: '20px'
         }
     },
+    gridRight: {
+        padding: '40px'
+    },
     WalletTrackerHeading: {
         display: 'flex',
         flex: '3 1 80%',

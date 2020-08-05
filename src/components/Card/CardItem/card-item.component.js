@@ -6,7 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import useCartItemStyles from './card-item.styles';
 import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-
+import CollectionsIcon from '@material-ui/icons/Collections';
 import Icon from '@material-ui/core/Icon'
 
 
@@ -18,8 +18,7 @@ const CardItem = ({name, amountSpent, icon}) => {
             <Card className={classes.CardItemContainer}>
                 <CardContent>
                     <Box className={classes.CardItemImage}>
-                        {/* <Icon style={{fontSize: 45}}>{icon}</Icon> */}
-                        <img style={{width: '40px', height: '40px'}} src={icon} alt={`${name}-icon`}/>
+                        {!icon ? <CollectionsIcon fontSize="large"/> :  <img className={classes.CardItemDefaultSize} src={icon} alt={`${name}-icon`}/> }
                     </Box>
                     <Box>
                         <Typography variant="caption" className={classes.CardItemCaption}>{name}</Typography>

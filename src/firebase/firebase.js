@@ -1,4 +1,4 @@
-import firebase, { functions } from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import 'firebase/storage';
@@ -33,7 +33,9 @@ export const checkUserInDatabase = async (userData) => {
         displayName: displayName,
         photoURL: photoURL,
         categoryList: {},
-        months: {}
+        months: {},
+        balanceHistory: [],
+        currentAccountBalance: 0
       })
   }
 

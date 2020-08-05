@@ -9,7 +9,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { useModal } from '../../context/Modal/modal.context';
 import MonthExpensesChart from '../Charts/MonthExpensesChart/month-expeneses-chart.component';
 
-const WalletTracker = ({balance: {revenues, expenses}, categories, months}) => {
+const WalletTracker = ({balance: {revenues, expenses}, categories, months, accountBalance}) => {
     const { handleOpen } = useModal();
     const classes = useWalletStyles();
     return (
@@ -40,7 +40,8 @@ const WalletTracker = ({balance: {revenues, expenses}, categories, months}) => {
                                 <MonthExpensesChart months={months}/>
                             </Box>
                     </Grid>
-                    <Grid item sm={4} xs={12} className={classes.gridRight}>    
+                    <Grid item sm={4} xs={12} className={classes.gridRight}>
+                            <Box>Your balance: {accountBalance}</Box>    
                             <CategoryChart categories={categories}/>
                     </Grid>
                 </Grid>

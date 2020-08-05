@@ -20,10 +20,10 @@ const Dashboard = () => {
         <>
         <Header user={user}/>
         <Container fixed>
-            <WalletTracker categories={user.categoryList} balance={balance} months={user.months}/>
+            <WalletTracker categories={user.categoryList} balance={balance} months={user.months} accountBalance={user.accountBalance}/>
             <CardItems categories={user.categoryList}/>
             <Snackbar type="success" />
-            <History/>
+            <History historyBalance={user.historyBalance}/>
             <Modal/>
         </Container>
         </>
