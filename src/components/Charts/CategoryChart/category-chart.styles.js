@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     },
     PieChartText: {
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'start',
         alignItems: 'center',
         fontSize: '1.3rem',
         fontWeight: 'bold',

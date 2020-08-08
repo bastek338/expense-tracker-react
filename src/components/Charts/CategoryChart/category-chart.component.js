@@ -4,6 +4,7 @@ import { Doughnut, defaults } from 'react-chartjs-2';
 import useStyles from './category-chart.styles';
 import { Box } from '@material-ui/core';
 import { useCategory } from '../../../context/CategoryList/category-list.context';
+import CategoryChartPriceList from './category-chart-price.legend';
 
 defaults.global.defaultFontFamily = 'Roboto';
 
@@ -14,10 +15,11 @@ const Chart = ({categories}) => {
     const categoriesAmount = Object.keys(categories).map(cat => categories[cat].amountSpent);
     const categoriesColor = Object.keys(categories).map(cat => categories[cat].color);
     return (
-        <div className={classes.PieChartContainer}>
+        <Box className={classes.PieChartContainer}>
             <Box className={classes.PieChartText}>
-                <p>Expenses for individual categories</p>
+                <p>Expenses</p>
             </Box>
+            <Box>
             <Doughnut data={{
                 labels: categoriesName,
                 datasets: [
@@ -31,7 +33,7 @@ const Chart = ({categories}) => {
                 options={{
                     responsive: true,
                     legend: {
-                        display: true,
+                        display: false,
                         position: 'bottom',
                         align: 'left',
                     },
@@ -52,7 +54,9 @@ const Chart = ({categories}) => {
                 width={100}
                 height={100}
             />
-        </div>
+            <CategoryChartPriceList categories={categories}/>
+            </Box>
+        </Box>
     )
 }
 

@@ -1,8 +1,14 @@
 import React from 'react'
 import { Bar } from 'react-chartjs-2'
 import dayjs from 'dayjs';
+import Box from '@material-ui/core/Box';
+import useStyles from './month-expenses-chart.styles';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 let arrayOfMonths = [];
+
+const revenuesColor = "#017eff";
+const expensesColor = "#e0e0e0";
 
 function getLastSixMonths() {
   for (let i = 6; i >= 0; i--) {
@@ -17,6 +23,7 @@ function getValuesFromMonths(array, value) {
 }
 
 const MonthExpensesChart = ({months}) => {
+    const classes = useStyles();
     const listOfMonths = arrayOfMonths;
     const monthsByName = listOfMonths.map(month => month.format('MMM'))
     const mapMonthsFromDatabase = listOfMonths.map(val => val.format('YYYY-MM')).reduce((result, item) => {
@@ -29,6 +36,10 @@ const MonthExpensesChart = ({months}) => {
 
     return (
         <div>
+            <Box className={classes.MonthExpensesChartLegend}>
+            <Box><FiberManualRecordIcon style={{color: `${revenuesColor}`}}/> Money In</Box>
+            <Box><FiberManualRecordIcon style={{color: `${expensesColor}`}}/> Money Out</Box>
+            </Box>
             <Bar
                 width={100}
                 height={40}
@@ -37,12 +48,12 @@ const MonthExpensesChart = ({months}) => {
                     datasets: [
                         {
                         label: 'Expenses',
-                        backgroundColor: '#e0e0e0',
+                        backgroundColor: expensesColor,
                         data: expensesValues
                         },
                         {
                         label: 'Revenues',
-                        backgroundColor: '#017eff',
+                        backgroundColor: revenuesColor,
                         data: revenuesValues
                         }
                     ],

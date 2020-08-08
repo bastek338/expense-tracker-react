@@ -2,8 +2,7 @@ import firebase from 'firebase/app';
 import uniqid from 'uniqid';
 import { db } from '../../firebase/firebase';
 
-export function depositSubmit ({user, currentMonth, amount, typeOfPayment, category, handleClose, description}) {
-    console.log(user)
+export function depositSubmit ({user, currentMonth, amount, typeOfPayment, category, handleClose, description, handleAlertOpen}) {
     db.doc(`users/${user.id}`).get().then(snapshot => {
             const revenues = !snapshot.data().months?.[currentMonth]?.revenues ? 0 : snapshot.data().months[currentMonth].revenues;
             const expenses = !snapshot.data().months?.[currentMonth]?.expenses ? 0 : snapshot.data().months[currentMonth].expenses;
@@ -26,11 +25,18 @@ export function depositSubmit ({user, currentMonth, amount, typeOfPayment, categ
                 accountBalance: snapshot.data().accountBalance + parseInt(amount)
             }, {merge: true})
     })
+    .then(() => {
+        handleClose();
+        handleAlertOpen('The deposit was successful', 'success')
+    })
+    .catch(() => {
+        handleAlertOpen('The deposit was unsuccessful', 'error')
+    })
     handleClose();
 }
 
 
-export function withdrawSubmit({user, currentMonth, amount, typeOfPayment, category, handleClose, description}){
+export function withdrawSubmit({user, currentMonth, amount, typeOfPayment, category, handleClose, description, handleAlertOpen}){
     db.doc(`users/${user.id}`).get().then(snapshot => {
         const revenues = !snapshot.data().months?.[currentMonth]?.revenues ? 0 : snapshot.data().months[currentMonth].revenues;
         const expenses = !snapshot.data().months?.[currentMonth]?.expenses ? 0 : snapshot.data().months[currentMonth].expenses;
@@ -58,6 +64,12 @@ export function withdrawSubmit({user, currentMonth, amount, typeOfPayment, categ
           accountBalance: snapshot.data().accountBalance - parseInt(amount)
         }, {merge: true})
     })
-    .then(() => handleClose())
-    .catch((e) => console.log(e.message))
+    .then(() => {
+        handleClose();
+        handleAlertOpen('The payout was successful.', 'success');
+    })
+    .catch((e) => {
+        handleClose();
+        handleAlertOpen(`The payout was unsuccessful: ${e.message}`)
+    })
 }

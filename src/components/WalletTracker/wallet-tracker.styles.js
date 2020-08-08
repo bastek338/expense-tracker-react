@@ -47,6 +47,16 @@ const useWalletStyles = makeStyles(theme => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start'
+    },
+    WalletTrackerBalanceAccount: {
+        display: 'flex',
+        alignContent: 'baseline',
+        fontSize: '42px',
+        fontWeight: '700'
+    },
+    WalletTrackerAccountBalanceText: {
+        marginTop: '-10px',
+        color: '#646464',
     }
 }))
 

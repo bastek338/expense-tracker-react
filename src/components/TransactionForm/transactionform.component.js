@@ -24,7 +24,7 @@ const TransactionForm = () => {
     const classes = useTransactionFormStyles();
     const { user } = useUser();
     const currentMonth = dayjs().format('YYYY-MM');
-    const settings = {user, currentMonth, amount, typeOfPayment, category, handleClose, description};
+    const settings = {user, currentMonth, amount, typeOfPayment, category, handleClose, description, handleAlertOpen};
 
     const transformedCategoryList = Object.keys(user.categoryList).map(key => {
         const item  = user.categoryList[key];
@@ -81,7 +81,7 @@ const TransactionForm = () => {
                     />
                 </FormControl>
                 </Box>
-                <Box pb={2}>
+                <Box pb={1}>
                 { typeOfPayment === 'withdraw' && 
                     <FormControl className={classes.transactionFormControl}>
                         <InputLabel htmlFor="select-category" className={classes.transactionFormLabel}>Kategoria</InputLabel>
@@ -95,7 +95,8 @@ const TransactionForm = () => {
                         </Select>
                     </FormControl> 
                 }
-                <Box>
+                </Box>
+                <Box pb={2}>
                     <FormControl className={classes.transactionFormControl}>
                         <TextField 
                             id="payment-description"
@@ -103,7 +104,6 @@ const TransactionForm = () => {
                             onChange={handleDescription}
                         />
                     </FormControl>
-                </Box>
                 </Box>
                 <Box pt={2} className={classes.transactionFormButton}>
                     { (typeOfPayment === 'deposit') ? 

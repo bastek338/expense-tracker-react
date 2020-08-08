@@ -8,6 +8,7 @@ import useWalletStyles from './wallet-tracker.styles';
 import AddIcon from '@material-ui/icons/Add';
 import { useModal } from '../../context/Modal/modal.context';
 import MonthExpensesChart from '../Charts/MonthExpensesChart/month-expeneses-chart.component';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 const WalletTracker = ({balance: {revenues, expenses}, categories, months, accountBalance}) => {
     const { handleOpen } = useModal();
@@ -36,12 +37,20 @@ const WalletTracker = ({balance: {revenues, expenses}, categories, months, accou
                 <Grid container>
                     <Grid item sm={8} xs={12} className={classes.gridLeft}>
                             <ProfitIconsComponent revenues={revenues} expenses={expenses}/>
-                            <Box pt={6}>
+                            <Box pt={3}>
                                 <MonthExpensesChart months={months}/>
                             </Box>
                     </Grid>
                     <Grid item sm={4} xs={12} className={classes.gridRight}>
-                            <Box>Your balance: {accountBalance}</Box>    
+                    <Box>
+                        <Box className={classes.WalletTrackerBalanceAccount}>
+                                <Box pt="5px" ml="-10px">
+                                    <AttachMoneyIcon style={{fontSize: 42}}/>
+                                </Box> 
+                                <Box ml="-15px">{accountBalance}</Box> 
+                        </Box>
+                        <Box className={classes.WalletTrackerAccountBalanceText}>current cash balance</Box>
+                    </Box>
                             <CategoryChart categories={categories}/>
                     </Grid>
                 </Grid>
