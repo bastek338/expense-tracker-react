@@ -12,15 +12,26 @@ import Header from '../../components/Header/header.component.js';
 import { useUser } from '../../context/User/user.context.js';
 import dayjs from 'dayjs';
 import History from '../../components/History/history.component.js';
+import ColorPicker from '../../components/UI/ColorPicker/color-picker.component.js';
+import { Drawer } from '@material-ui/core';
+
+
 
 const Dashboard = () => {
+
+
+    const container = window !== undefined ? () => window.document.body : undefined;
+
+console.log(container)
+
     const { user } = useUser();
     const balance = !user.months?.[dayjs().format('YYYY-MM')] ? {revenues: 0, expenses: 0} : user.months?.[dayjs().format('YYYY-MM')];
     return (
         <>
         <Header user={user}/>
-        <Container fixed>
-            <WalletTracker categories={user.categoryList} balance={balance} months={user.months} accountBalance={user.accountBalance}/>
+        <Drawer container={container} variant="temporary" style={{display: 'block', width: '250px', height: '100px', flexShrink: 0}}>witam</Drawer>
+        <Container >
+            <WalletTracker categories={user.categoryList} balance={balance} months={user.months} accountBalance={user.currentAccountBalance}/>
             <CardItems categories={user.categoryList}/>
             <Snackbar type="success" />
             <History historyBalance={user.historyBalance}/>

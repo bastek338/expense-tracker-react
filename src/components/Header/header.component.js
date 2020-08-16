@@ -49,7 +49,7 @@ const Header = ({ user } ) => {
                 </div>
                 <nav className={classes.navigationContainerDesktop} variant="subtitle1">
                     <NavLink to="/contact" href="#" color="inherit" underline="none" className={classes.HeaderLink}>
-                        Contact
+                        Months History
                     </NavLink>
                    <Avatar alt={user.displayName} src={user.photoURL} className={classes.HeaderAvatarSize} />
                    <span className={classes.HeaderAvatarName}>{displayName}</span>

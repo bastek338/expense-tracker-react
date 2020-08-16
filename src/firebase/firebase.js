@@ -33,7 +33,14 @@ export const checkUserInDatabase = async (userData) => {
         displayName: displayName,
         photoURL: photoURL,
         categoryList: {},
-        months: {},
+        months: {
+          [dayjs().format('YYYY-MM')]: {
+            costs: 0,
+            revenues: 0,
+            expenses: 0,
+            monthlyLimit: 0
+          }
+        },
         balanceHistory: [],
         currentAccountBalance: 0
       })

@@ -3,8 +3,6 @@ const { makeStyles } = require("@material-ui/core");
 const useStyles = makeStyles((theme) => ({
     PieChartContainer: {
         '& canvas': {
-            height: '100%',
-            width: '100%'
         }
     },
     PieChartText: {

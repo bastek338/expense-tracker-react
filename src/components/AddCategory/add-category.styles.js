@@ -5,7 +5,7 @@ const useStyles = makeStyles(theme => ({
         width: '300px',
         display: 'flex',
         flexDirection: 'column',
-        '& div:not(:first-child)': {
+        '& > div:not(:first-child)': {
             marginTop: '15px'
         }
     },
@@ -13,16 +13,17 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'flex-end'
     },
-    AddCategoryUploadButton: {
-        marginTop: '15px'
-    },
     AddCategoryInputFile: {
         display: 'none'
     },
     AddCategoryMsg: {
-        paddingTop: '5px',
+        paddingTop: '15px',
         color: '#c21010',
-        fontSize: '12px'
+        fontSize: '14px'
+    },
+    AddCategoryUploadContainer: {
+        display: 'flex',
+        alignItems: 'center'
     }
 })) 
 

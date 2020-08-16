@@ -6,6 +6,7 @@ import useModalStyles from './modal.styles';
 import { useModal } from '../../../context/Modal/modal.context';
 import TransactionForm from '../../TransactionForm/transactionform.component';
 import AddCategory from '../../AddCategory/add-category.component';
+import SetLimit from '../../ModalViews/setLimit.component';
 
 const ModalWrapper = () => {
     let modalChildren = null;
@@ -13,11 +14,24 @@ const ModalWrapper = () => {
     const modalRef = useRef();
     const { open, handleClose, modalType } = useModal();
 
-    if(modalType === 'transaction-form'){
-        modalChildren = <TransactionForm /> 
-    } else if(modalType === 'category') {
-        modalChildren = <AddCategory/>
+    switch(modalType) {
+        case 'transaction-form':
+            modalChildren = <TransactionForm /> 
+            break;
+        case 'category':
+            modalChildren = <AddCategory/>
+            break;
+        case 'setLimit':
+            modalChildren = <SetLimit/>
+            break;
+        case '':
+            modalChildren = null;
+            break;
+        default:
+            console.error('unknown modalType')
     }
+
+
 
     return ( 
         <div>

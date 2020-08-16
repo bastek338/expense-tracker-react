@@ -1,6 +1,5 @@
 import React from 'react';
 import { Doughnut, defaults } from 'react-chartjs-2';
-
 import useStyles from './category-chart.styles';
 import { Box } from '@material-ui/core';
 import { useCategory } from '../../../context/CategoryList/category-list.context';
@@ -15,11 +14,11 @@ const Chart = ({categories}) => {
     const categoriesAmount = Object.keys(categories).map(cat => categories[cat].amountSpent);
     const categoriesColor = Object.keys(categories).map(cat => categories[cat].color);
     return (
-        <Box className={classes.PieChartContainer}>
-            <Box className={classes.PieChartText}>
-                <p>Expenses</p>
-            </Box>
-            <Box>
+        <>
+            {/* <Box className={classes.PieChartText}>
+                Category Expenses
+            </Box> */}
+            <Box className={classes.PieChartContainer}>
             <Doughnut data={{
                 labels: categoriesName,
                 datasets: [
@@ -54,9 +53,11 @@ const Chart = ({categories}) => {
                 width={100}
                 height={100}
             />
-            <CategoryChartPriceList categories={categories}/>
             </Box>
-        </Box>
+            <Box>
+                <CategoryChartPriceList categories={categories}/>
+            </Box>
+        </>
     )
 }
 

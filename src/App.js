@@ -9,9 +9,6 @@ import {
 import { auth, checkUserInDatabase } from './firebase/firebase';
 import PrivateRoute from './utils/PrivateRoute/private-route';
 import Loader from './components/UI/Spinner/spinner';
-import { useFormikValidation } from './components/RegisterForm/register-form.validation';
-import { firestore } from 'firebase';
-
 
 const Dashboard = React.lazy(() => import('./pages/Dashboard/dashboard.component'))
 const Login = React.lazy(() => import('./pages/Login/login.component'))

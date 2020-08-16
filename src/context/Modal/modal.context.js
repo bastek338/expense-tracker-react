@@ -5,7 +5,7 @@ const ModalProvider = ({children}) => {
     const [open, setOpen] = useState(false);
     const [modalType, setModalType] = useState(''); 
 
-    const handleOpen = (message) => {
+    const handleOpen = (message, additionalData) => {
         setOpen(true);
         setModalType(message)
     }

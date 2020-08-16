@@ -20,17 +20,18 @@ export function depositSubmit ({user, currentMonth, amount, typeOfPayment, categ
                     amount: parseInt(amount), 
                     date: firebase.firestore.Timestamp.fromDate(new Date()), 
                     description: description, 
-                    accountBalance: snapshot.data().accountBalance + parseInt(amount)
+                    accountBalance: snapshot.data().currentAccountBalance + parseInt(amount)
                 }),
-                accountBalance: snapshot.data().accountBalance + parseInt(amount)
+                currentAccountBalance: snapshot.data().currentAccountBalance + parseInt(amount)
             }, {merge: true})
     })
     .then(() => {
         handleClose();
         handleAlertOpen('The deposit was successful', 'success')
     })
-    .catch(() => {
+    .catch((e) => {
         handleAlertOpen('The deposit was unsuccessful', 'error')
+        console.log(e)
     })
     handleClose();
 }
@@ -59,9 +60,9 @@ export function withdrawSubmit({user, currentMonth, amount, typeOfPayment, categ
             amount: parseInt(amount), 
             date: firebase.firestore.Timestamp.fromDate(new Date()), 
             description: description, 
-            accountBalance: snapshot.data().accountBalance - parseInt(amount)
+            accountBalance: snapshot.data().currentAccountBalance - parseInt(amount)
           }),
-          accountBalance: snapshot.data().accountBalance - parseInt(amount)
+          currentAccountBalance: snapshot.data().currentAccountBalance - parseInt(amount)
         }, {merge: true})
     })
     .then(() => {

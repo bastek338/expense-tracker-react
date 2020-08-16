@@ -83,12 +83,12 @@ const StyledTableCell = withStyles({
     }
   })(TableCell)
 
-const HistoryTable = ({historyBalance}) => {
+const HistoryTable = ({historyBalance = []}) => {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, historyBalance.length - page * rowsPerPage);
-  
+    console.log(historyBalance)
     const handleChangePage = (e, newPage) => {
       setPage(newPage);
     };
@@ -108,7 +108,7 @@ const HistoryTable = ({historyBalance}) => {
                     <StyledTableCell align="left">Amount</StyledTableCell>
                     <StyledTableCell align="left">Date</StyledTableCell>
                     <StyledTableCell align="left">Description</StyledTableCell>
-                    <StyledTableCell align="center">Balance after operation</StyledTableCell>
+                    <StyledTableCell align="center">Balance after</StyledTableCell>
                 </TableRow>
             </TableHead>
                 <TableBody>

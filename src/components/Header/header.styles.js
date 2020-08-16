@@ -120,7 +120,8 @@ const headerStyles = makeStyles((theme) => ({
         height: '40px'
       },
       HeaderAvatarName: {
-        fontSize: '0.9rem'
+        fontSize: '0.9rem',
+        fontWeight: 'normal'
       }
 }))
 
