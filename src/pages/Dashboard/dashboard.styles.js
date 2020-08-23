@@ -1,17 +1,16 @@
-// import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-// const dashboardStyles = {
-//     dashboardContainer: {
-//     },
-//     gridLeft: {
-//         padding: '64px 0 64px 64px',
-//         borderRight: '1px dashed #d6d6d6'
-//     },
-//     walletCaption: {
-//         display: 'flex',
-//         justifyContent: 'space-between',
-//         alignItems: 'center'
-//     }
-// }
+const dashboardStyles = makeStyles((theme) => ({
+    DashboardContainer: {
+        display: 'flex'
+    },
+    DashboardElements: {
+        width: '100%',
+        order: 1,
+        flexGrow: 1,
+        padding: theme.spacing(3),
+    },
+    DashboardToolbar: theme.mixins.toolbar
+}))
 
-// export default dashboardStyles;
+export default dashboardStyles;

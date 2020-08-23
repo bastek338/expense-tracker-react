@@ -7,6 +7,7 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import ProfitIconsComponent from '../../Icons/ProfitIcons/profit-icon.component';
 import useStyles from './tracker-elements.styles'
 import LimitTrackerBar from '../../UI/LimitTrackerBar/limit-tracker-bar.component';
+import { Select } from '@material-ui/core';
 
 
 const TrackerElements = ({revenues, expenses, categories, months, accountBalance}) => {

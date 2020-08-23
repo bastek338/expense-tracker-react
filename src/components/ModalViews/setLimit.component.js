@@ -9,10 +9,7 @@ const SetLimit = () => {
     const [limit, setLimit] = React.useState(0);
     const { user } = useUser();
     const currentMonth = dayjs().format('YYYY-MM');
-    console.log(currentMonth)
     const {handleClose} = useModal();
-
-    console.log(limit, currentMonth)
 
     const updateLimitValue = (e) => {
         e.preventDefault();

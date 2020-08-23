@@ -19,7 +19,7 @@ const CustomProgressBar = styled.progress`
         height: 35px;
     }
     &[value]::-moz-progress-bar {
-	background-color: #303F9F;
+	background-color: ${props => props.color};
 	border-radius: 3px;
     }
     &[value]::-webkit-progress-bar {
@@ -28,7 +28,7 @@ const CustomProgressBar = styled.progress`
 	border-radius: 3px;
     }
     &[value]::-webkit-progress-value {
-        background-color: #303F9F;
+        background-color: ${props => props.color};
         border-radius: 3px;
     }
 }
@@ -39,7 +39,19 @@ const LimitTracker = () => {
     const classes = useStyles();
     const { user: { months } } = useUser();
     const {expenses: expensesInCurrentMonth, monthlyLimit} = months[dayjs().format('YYYY-MM')];
-    console.log(monthlyLimit)
+    const rounded = Math.floor(expensesInCurrentMonth / monthlyLimit * 100);
+    let color = '';
+    console.log(Math.floor(rounded));
+
+    if(rounded >= 80) {
+        color = '#e02f1f';
+    } else if(rounded >= 40) {
+        color = '#f7e925';
+    } else if(rounded < 40 ) {
+        color = '#23c238';
+    };
+
+
     return (
         <div className={classes.LimitTrackerContainer}>
                 {
@@ -56,7 +68,7 @@ const LimitTracker = () => {
                             </Box>
                     </Box>
                     <Box className={classes.LimitTrackerBar}>
-                        <CustomProgressBar max={monthlyLimit} value={expensesInCurrentMonth}></CustomProgressBar>
+                        <CustomProgressBar color={color} max={monthlyLimit} value={expensesInCurrentMonth}></CustomProgressBar>
                     </Box>   
                     </> 
                         ) : <Box>You dont have set limit yet.</Box>

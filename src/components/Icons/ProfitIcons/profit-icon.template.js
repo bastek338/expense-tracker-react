@@ -4,7 +4,6 @@ import useStyles from './profit-icon.styles';
 
 const ProfitIconTemplate = ({children, price, text, color}) => {
     const classes = useStyles();
-    console.log(price)
     return (
     <Box className={classes.ProfitIconContainer}>
         <Box className={classes.ProfitIconImage}>

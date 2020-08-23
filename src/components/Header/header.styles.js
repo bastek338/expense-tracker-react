@@ -1,11 +1,18 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { drawerWidth } from '../UI/SideBar/sidebar.styles';
 
 const headerStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
-    appBarContainer: {
+    HeaderContainer: {
+        backgroundColor: '#F1F2F6',
+        color: '#000',
         padding: theme.spacing(1, 0),
+        [theme.breakpoints.up('sm')]: {
+          width: `calc(100% - ${drawerWidth}px)`,
+          marginRight: drawerWidth,
+        },
     },
     logoContainer: {
         display: 'flex',

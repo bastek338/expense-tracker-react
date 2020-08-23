@@ -9,23 +9,26 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { auth, db } from '../../firebase/firebase';
 import Avatar from '@material-ui/core/Avatar';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import SideBar from '../UI/SideBar/sidebar.component';
 
 const Header = ({ user } ) => {
     const classes = headerStyles()
     const history = useHistory(); 
     const displayName = user.displayName;
-    const logout = () => {
-        auth.signOut()
-    .catch(err => console.log(err.message))
-    }
+
 
     if(!user) {
         history.push('/login')
     }
 
+    const [mobileOpen, setMobileOpen] = React.useState(false);
+
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen);
+    };
+
     const headerBody = (
-        <div className={classes.root} xs={12}>
-        <AppBar position="static" color="transparent" className={classes.appBarContainer}>
+        <AppBar position="fixed" className={classes.HeaderContainer}>
             <Toolbar>
                 <div className={classes.logoContainer}>
                 <SvgIcon className={classes.logoSize}>
@@ -48,30 +51,26 @@ const Header = ({ user } ) => {
                     </div>
                 </div>
                 <nav className={classes.navigationContainerDesktop} variant="subtitle1">
-                    <NavLink to="/contact" href="#" color="inherit" underline="none" className={classes.HeaderLink}>
-                        Months History
-                    </NavLink>
-                   <Avatar alt={user.displayName} src={user.photoURL} className={classes.HeaderAvatarSize} />
-                   <span className={classes.HeaderAvatarName}>{displayName}</span>
-                   <IconButton className={classes.HeaderButtons} variant="contained" onClick={logout}>
-                       <ExitToAppIcon/>
-                   </IconButton>
                 </nav>
                 <div className={classes.navigationContainerMobile}>
                     <IconButton
                       aria-label="show more"
                       aria-haspopup="true"
-                      onClick={() => {}}
+                      onClick={handleDrawerToggle}
                     >
                         <MoreIcon />
                     </IconButton>
                 </div>
             </Toolbar>
         </AppBar>
-    </div>
     )
 
-    return headerBody
+    return (
+        <>
+        {headerBody}
+        <SideBar name={displayName} handleDrawerToggle={handleDrawerToggle} mobileOpen={mobileOpen}/>
+        </>
+    )
 }
 
 
