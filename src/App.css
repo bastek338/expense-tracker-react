@@ -12,3 +12,8 @@ body {
     background: #f1f2f6;
     font-family: "Circular Std Book" ;
 }
+
+.AppContainer {
+        display: flex;
+        padding: 24px
+}

@@ -3,13 +3,13 @@ import dashboardStyles from './dashboard.styles.js';
 import Snackbar from '../../components/UI/Snackbar/snackbar.component';
 import Modal from '../../components/UI/Modal/modal.component';
 import CardItems from '../../components/Card/CardItems/card-items.component'
-import { withStyles } from '@material-ui/core/styles';
 import WalletTracker from '../../components/WalletTracker/wallet-tracker.component';
 import Header from '../../components/Header/header.component.js';
 import { useUser } from '../../context/User/user.context.js';
 import dayjs from 'dayjs';
 import History from '../../components/History/history.component.js';
-
+import withAnimation from '../../hoc/withAnimation';
+import { fadeIn } from 'react-animations';
 
 const Dashboard = () => {
     const { user } = useUser();
@@ -18,7 +18,6 @@ const Dashboard = () => {
 
     return (
         <div className={classes.DashboardContainer}>
-        <Header user={user}/>
         <div className={classes.DashboardElements}>
             <div className={classes.DashboardToolbar}/>
             <WalletTracker categories={user.categoryList} balance={balance} months={user.months} accountBalance={user.currentAccountBalance}/>
@@ -34,4 +33,4 @@ const Dashboard = () => {
 
 
 
-export default withStyles(dashboardStyles)(Dashboard);
+export default withAnimation(Dashboard, fadeIn);

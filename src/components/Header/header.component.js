@@ -11,10 +11,10 @@ import Avatar from '@material-ui/core/Avatar';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SideBar from '../UI/SideBar/sidebar.component';
 
-const Header = ({ user } ) => {
+const Header = ({ user }) => {
     const classes = headerStyles()
     const history = useHistory(); 
-    const displayName = user.displayName;
+    const displayName = user?.displayName ? user?.displayName : '';
 
 
     if(!user) {

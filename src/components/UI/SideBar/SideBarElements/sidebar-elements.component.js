@@ -7,6 +7,7 @@ import HomeIcon from '@material-ui/icons/HomeOutlined';
 import CustomListItem from '../../CustomListItem/custom-list-item.component';
 import CategoryOutlinedIcon from '@material-ui/icons/CategoryOutlined';
 import SideBarProfile from './SideBarProfile/sidebar-profile.component';
+import BarLoader from 'react-spinners/BarLoader';
 
 const SideBarElements = ({name}) => {
 
@@ -19,7 +20,11 @@ const SideBarElements = ({name}) => {
                 <CustomListItem text="Dashboard" icon={HomeIcon} pathname="/"/>
                 <CustomListItem text="Categories" icon={CategoryOutlinedIcon} pathname="category"/>
             </List>
-            <SideBarProfile user={user}/>
+            {user ? <SideBarProfile user={user}/> : (
+                <Box className={classes.SideBarElementsLoaderBox}>
+                    <BarLoader size={100}  color={"#000"} />
+                </Box>
+            )}
         </div>
     )
 }

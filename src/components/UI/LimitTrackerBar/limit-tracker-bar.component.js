@@ -41,8 +41,7 @@ const LimitTracker = () => {
     const {expenses: expensesInCurrentMonth, monthlyLimit} = months[dayjs().format('YYYY-MM')];
     const rounded = Math.floor(expensesInCurrentMonth / monthlyLimit * 100);
     let color = '';
-    console.log(Math.floor(rounded));
-
+    
     if(rounded >= 80) {
         color = '#e02f1f';
     } else if(rounded >= 40) {

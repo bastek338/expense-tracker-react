@@ -8,6 +8,14 @@ const sideBarStyles = makeStyles(theme => ({
     },
     SideBarElementsListSpacing: {
         padding: theme.spacing(1)
+    },
+    SideBarElementsLoaderBox: {
+        width: '100%',
+        display: 'flex',
+        marginTop: 'auto',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: theme.spacing(3, 0)
     }
 }))
 

@@ -11,6 +11,7 @@ const CustomListItem = ({text, icon: Icon, pathname}) => {
         <ListItem 
             button
             component={NavLink}
+            exact
             to={pathname}
             activeClassName={classes.CustomListActiveLink}
             className={classes.CustomListContainer}
